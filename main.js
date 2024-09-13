@@ -30,6 +30,8 @@ axios.get(url)
     ////3////
     //10
     posibleBatterDonuts(data);
+    //11
+    posibleToppingDonuts(data);
     /////////
   })
   .catch(function (error) {
@@ -273,6 +275,25 @@ function posibleBatterDonuts(data){
         }
         console.log(string);
         string = "The posibles batters of ";
+        counter = 0;
+    }
+}
+function posibleToppingDonuts(data){
+    let string = "The posibles toppings of ";
+    let counter = 0;
+    for (i = 0; i < data.items.item.length; i++){
+        string += data.items.item[i].name + " are: ";
+        for (j = 0; j < data.items.item[i].topping.length; j++){
+            if(counter < data.items.item[i].topping.length - 1){
+                string += data.items.item[i].topping[j].type + ", "
+            }
+            else{
+                string += data.items.item[i].topping[j].type
+            }
+            counter++;
+        }
+        console.log(string);
+        string = "The posibles toppings of ";
         counter = 0;
     }
 }
