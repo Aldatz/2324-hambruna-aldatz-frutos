@@ -33,16 +33,17 @@ axios.get(url)
     //11
     posibleToppingDonuts(data);
     /////////
-    ////3////
+    ////4////
     //12
     buyDonuts(data);
     /////////
+    ////5////
+    //13
+    cholesterolDonuts(data);
+    /////////
   })
   .catch(function (error) {
-    // manejar error
-    console.log(error);
-  })
-  .finally(function () {
+    // manejar error4
     // siempre sera executado
   });
 
@@ -314,5 +315,14 @@ function buyDonuts(data){
         silver = 4;
         counter = 0;
     } 
+}
+    //////////////////////////////////////////////////
+function cholesterolDonuts(data){
+    for (i = 0; i < data.items.item.length; i++){
+        if (parseFloat(data.items.item[i].nutrition_facts.nutrition.cholesterol.amount) > 12) {
+            data.items.item[i].nutrition_facts.nutrition.fat.fat_type.trans = "3.2g";
+        }
+        console.log(data.items.item[i].nutrition_facts.nutrition.fat.fat_type.trans);
+    }
 }
 
