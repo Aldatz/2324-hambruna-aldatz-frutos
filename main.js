@@ -10,6 +10,8 @@ axios.get(url)
     ironDonut(data);
     //3
     proteineDonut(data);
+    //4
+    fibreDonut(data);
 
   })
   .catch(function (error) {
@@ -23,6 +25,7 @@ axios.get(url)
 function sugarDonut(data){
     let maxSugar = 0;
     let counter = 0;
+    let counter2 = 0;
     let donutNames = "";
     
     for (i = 0; i < data.items.item.length; i++){
@@ -40,7 +43,13 @@ function sugarDonut(data){
             donutNames = data.items.item[i].name;
         }
         else if (maxSugar === parseInt(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars) && counter > 1){
-            donutNames = donutNames + data.items.item[i].name + " ";
+            if (counter2 != counter - 1) {
+                donutNames = donutNames + data.items.item[i].name + ", ";
+            }
+            else{
+                donutNames = donutNames + data.items.item[i].name;
+            }
+            counter2 += 1;
         }
     }
     if (counter <= 1){
@@ -53,6 +62,7 @@ function sugarDonut(data){
   function ironDonut(data){
     let maxIron = 0;
     let counter = 0;
+    let counter2 = 0;
     let donutNames = "";
     
     for (i = 0; i < data.items.item.length; i++){
@@ -76,7 +86,13 @@ function sugarDonut(data){
                     donutNames = data.items.item[i].name;
                 }
                 else if ("Iron" === data.items.item[i].nutrition_facts.nutrition.vitamines[j].type && maxIron === parseInt(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent) && counter > 1){
-                    donutNames = donutNames + data.items.item[i].name + " ";
+                    if (counter2 != counter - 1) {
+                        donutNames = donutNames + data.items.item[i].name + ", ";
+                    }
+                    else{
+                        donutNames = donutNames + data.items.item[i].name;
+                    }
+                    counter2 += 1;
                 }
             }
         }
@@ -91,6 +107,7 @@ function sugarDonut(data){
   function proteineDonut(data){
     let maxProteine = 0;
     let counter = 0;
+    let counter2 = 0;
     let donutNames = "";
     
     for (i = 0; i < data.items.item.length; i++){
@@ -108,7 +125,13 @@ function sugarDonut(data){
             donutNames = data.items.item[i].name;
         }
         else if (maxProteine === parseInt(data.items.item[i].nutrition_facts.nutrition.proteine) && counter > 1){
-            donutNames = donutNames + data.items.item[i].name + " ";
+            if (counter2 != counter - 1) {
+                donutNames = donutNames + data.items.item[i].name + ", ";
+            }
+            else{
+                donutNames = donutNames + data.items.item[i].name;
+            }
+            counter2 += 1;
         }
     }
     if (counter <= 1){
@@ -116,5 +139,42 @@ function sugarDonut(data){
     }
     else{
         console.log("the donuts whit more proteines are: " + donutNames);
+    }
+  }
+  function fibreDonut(data){
+    let maxFibre = 100000000;
+    let counter = 0;
+    let counter2 = 0;
+    let donutNames = "";
+    
+    for (i = 0; i < data.items.item.length; i++){
+        if (maxFibre >= parseInt(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre)){
+            maxFibre = parseInt(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre)
+        }
+    }
+    for (i = 0; i < data.items.item.length; i++){
+        if (maxFibre === parseInt(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre)){
+            counter += 1
+        }
+    }
+    for (i = 0; i < data.items.item.length; i++){
+        if (maxFibre === parseInt(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre) && counter <= 1){
+            donutNames = data.items.item[i].name;
+        }
+        else if (maxFibre === parseInt(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre) && counter > 1){
+            if (counter2 != counter - 1) {
+                donutNames = donutNames + data.items.item[i].name + ", ";
+            }
+            else{
+                donutNames = donutNames + data.items.item[i].name;
+            }
+            counter2 += 1;
+        }
+    }
+    if (counter <= 1){
+        console.log(donutNames + " is the donut whit more sugar");
+    }
+    else{
+        console.log("The donuts whit more sugar are: " + donutNames);
     }
   }
