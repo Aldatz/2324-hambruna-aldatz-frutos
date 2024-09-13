@@ -22,6 +22,8 @@ axios.get(url)
     listCarbohydratesDonut(data);
     //7
     caloriesMediaDonut(data);
+    //8
+    fatSumDonut(data);
 
     /////////
   })
@@ -212,8 +214,15 @@ function caloriesMediaDonut(data){
         counter++;
     }
     let media = sum / counter;
-
     console.log("the media of the calories is: " + media);
+}
+function fatSumDonut(data){
+    let sum = 0;
+    
+    for (i = 0; i < data.items.item.length; i++){
+        sum += parseFloat(data.items.item[i].nutrition_facts.nutrition.fat.fat_type.saturated);  
+    }
+    console.log("The total saturated fat is: " + sum + "g");
     
 }
 
