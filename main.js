@@ -27,6 +27,10 @@ axios.get(url)
     //9
     vitamineMediaDonut(data);
     /////////
+    ////3////
+    //10
+    posibleBatterDonuts(data);
+    /////////
   })
   .catch(function (error) {
     // manejar error
@@ -196,7 +200,6 @@ function sugarDonut(data){
 function listCalorieDonut(data){
     for (i = 0; i < data.items.item.length; i++){
         console.log(data.items.item[i].name + " have " + data.items.item[i].nutrition_facts.nutrition.calories + " calories");
-        
     }
 }
 function listCarbohydratesDonut(data){
@@ -252,5 +255,25 @@ function vitamineMediaDonut(data){
     console.log("The media percen of the Vitamin C is: " + sum2 / counter + "%");
     console.log("The media percen of the Calcium is: " + sum3 / counter + "%");
     console.log("The media percen of the Iron A is: " + sum4 / counter + "%");
+}
+    /////////////////////////////////////////////////////
+function posibleBatterDonuts(data){
+    let string = "The posibles batters of ";
+    let counter = 0;
+    for (i = 0; i < data.items.item.length; i++){
+        string += data.items.item[i].name + " are: ";
+        for (j = 0; j < data.items.item[i].batters.batter.length; j++){
+            if(counter < data.items.item[i].batters.batter.length - 1){
+                string += data.items.item[i].batters.batter[j].type + ", "
+            }
+            else{
+                string += data.items.item[i].batters.batter[j].type
+            }
+            counter++;
+        }
+        console.log(string);
+        string = "The posibles batters of ";
+        counter = 0;
+    }
 }
 
