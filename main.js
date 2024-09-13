@@ -20,6 +20,8 @@ axios.get(url)
     listCalorieDonut(data);
     //6
     listCarbohydratesDonut(data);
+    //7
+    caloriesMediaDonut(data);
 
     /////////
   })
@@ -200,5 +202,18 @@ function listCarbohydratesDonut(data){
             + data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.amount + ", type, fibres: " + data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre
             + ", sugars: " + data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars);
     }
+}
+function caloriesMediaDonut(data){
+    let counter = 0;
+    let sum = 0;
+    
+    for (i = 0; i < data.items.item.length; i++){
+        sum += parseInt(data.items.item[i].nutrition_facts.nutrition.calories);
+        counter++;
+    }
+    let media = sum / counter;
+
+    console.log("the media of the calories is: " + media);
+    
 }
 
