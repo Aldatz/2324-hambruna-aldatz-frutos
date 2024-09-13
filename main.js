@@ -18,8 +18,10 @@ axios.get(url)
     ////2////
     //5
     listCalorieDonut(data);
+    //6
+    listCarbohydratesDonut(data);
 
-
+    /////////
   })
   .catch(function (error) {
     // manejar error
@@ -192,3 +194,11 @@ function listCalorieDonut(data){
         
     }
 }
+function listCarbohydratesDonut(data){
+    for (i = 0; i < data.items.item.length; i++){
+        console.log(data.items.item[i].name + " have daily value " + data.items.item[i].nutrition_facts.nutrition.carbohydrate.daily_value + ", carbs_details, amount: "
+            + data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.amount + ", type, fibres: " + data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.fibre
+            + ", sugars: " + data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars);
+    }
+}
+
