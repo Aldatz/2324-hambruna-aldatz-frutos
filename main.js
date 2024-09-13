@@ -4,7 +4,8 @@ const url = "https://gist.githubusercontent.com/Oskar-Dam/62e7175dc542af53a9d18c
 axios.get(url)
   .then(function (response) {
     const data = response.data;
-    //1.
+    ////1////
+    //1
     sugarDonut(data);
     //2
     ironDonut(data);
@@ -12,6 +13,12 @@ axios.get(url)
     proteineDonut(data);
     //4
     fibreDonut(data);
+    /////////
+
+    ////2////
+    //5
+    listCalorieDonut(data);
+
 
   })
   .catch(function (error) {
@@ -58,7 +65,7 @@ function sugarDonut(data){
     else{
         console.log("the donuts whit more sugar are: " + donutNames);
     }
-  }
+}
   function ironDonut(data){
     let maxIron = 0;
     let counter = 0;
@@ -103,7 +110,7 @@ function sugarDonut(data){
     else{
         console.log("the donuts whit more iron are: " + donutNames);
     }
-  }
+}
   function proteineDonut(data){
     let maxProteine = 0;
     let counter = 0;
@@ -140,7 +147,7 @@ function sugarDonut(data){
     else{
         console.log("the donuts whit more proteines are: " + donutNames);
     }
-  }
+}
   function fibreDonut(data){
     let maxFibre = 100000000;
     let counter = 0;
@@ -177,4 +184,11 @@ function sugarDonut(data){
     else{
         console.log("The donuts whit more sugar are: " + donutNames);
     }
-  }
+}
+  ///////////////////////////////////////////////////////////////////////
+function listCalorieDonut(data){
+    for (i = 0; i < data.items.item.length; i++){
+        console.log(data.items.item[i].name + " have " + data.items.item[i].nutrition_facts.nutrition.calories + " calories");
+        
+    }
+}
