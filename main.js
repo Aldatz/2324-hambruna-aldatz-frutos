@@ -33,6 +33,10 @@ axios.get(url)
     //11
     posibleToppingDonuts(data);
     /////////
+    ////3////
+    //12
+    buyDonuts(data);
+    /////////
   })
   .catch(function (error) {
     // manejar error
@@ -296,5 +300,19 @@ function posibleToppingDonuts(data){
         string = "The posibles toppings of ";
         counter = 0;
     }
+}
+    //////////////////////////////////////////
+function buyDonuts(data){
+    let silver = 4;
+    let counter = 0;
+    for (i = 0; i < data.items.item.length; i++){
+        while (silver > parseFloat(data.items.item[i].ppu)){
+            silver -= parseFloat(data.items.item[i].ppu);
+            counter++;
+        }
+        console.log("With 4 silver coins you can buy " + counter + " " + data.items.item[i].name + " and you have "+ silver +" silver left over");
+        silver = 4;
+        counter = 0;
+    } 
 }
 
