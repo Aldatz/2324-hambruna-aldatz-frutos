@@ -7,7 +7,7 @@ axios.get(url)
     //1.
     sugarDonut(data);
     //2
-
+    ironDonut(data);
 
   })
   .catch(function (error) {
@@ -41,12 +41,48 @@ function sugarDonut(data){
             donutNames = donutNames + data.items.item[i].name + " ";
         }
     }
-
     if (counter <= 1){
         console.log(donutNames + " is the donut whit more sugar");
     }
     else{
         console.log("the donuts whit more sugar are: " + donutNames);
     }
+  }
+  function ironDonut(data){
+    let maxIron = 0;
+    let counter = 0;
+    let donutNames = "";
     
+    for (i = 0; i < data.items.item.length; i++){
+        for (let j = 0; j < data.items.item[i].nutrition_facts.nutrition.vitamines.length; j++) {
+            if ("Iron" === data.items.item[i].nutrition_facts.nutrition.vitamines[j].type && maxIron <= parseInt(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent)){
+                maxIron = parseInt(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent)
+            }
+        }   
+    }
+    for (i = 0; i < data.items.item.length; i++){
+        for (let j = 0; j < data.items.item[i].nutrition_facts.nutrition.vitamines.length; j++) {
+            if ("Iron" === data.items.item[i].nutrition_facts.nutrition.vitamines[j].type && maxIron === parseInt(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent)){
+                counter += 1;                
+            }
+        }
+    }
+    for (i = 0; i < data.items.item.length; i++){
+        for (i = 0; i < data.items.item.length; i++){
+            for (let j = 0; j < data.items.item[i].nutrition_facts.nutrition.vitamines.length; j++) {
+                if ("Iron" === data.items.item[i].nutrition_facts.nutrition.vitamines[j].type && maxIron === parseInt(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent) && counter <= 1){
+                    donutNames = data.items.item[i].name;
+                }
+                else if ("Iron" === data.items.item[i].nutrition_facts.nutrition.vitamines[j].type && maxIron === parseInt(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent) && counter > 1){
+                    donutNames = donutNames + data.items.item[i].name + " ";
+                }
+            }
+        }
+    }
+    if (counter <= 1){
+        console.log(donutNames + " is the donut whit more iron");
+    }
+    else{
+        console.log("the donuts whit more iron are: " + donutNames);
+    }
   }
