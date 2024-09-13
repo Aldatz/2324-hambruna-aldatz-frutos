@@ -42,6 +42,8 @@ axios.get(url)
     cholesterolDonut(data);
     //14
     sugarAmounDonut(data);
+    //16
+    carbohydrateValueDonut(data);
     /////////
   })
   .catch(function (error) {
@@ -335,5 +337,10 @@ function sugarAmounDonut(data){
         console.log(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.amount);
     }
 }
-
+function carbohydrateValueDonut(data){
+    for (i = 0; i < data.items.item.length; i++){
+        data.items.item[i].nutrition_facts.nutrition.carbohydrate.daily_value = "53%";
+        console.log(data.items.item[i].nutrition_facts.nutrition.carbohydrate.daily_value);
+    }
+}
 
