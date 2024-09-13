@@ -39,7 +39,9 @@ axios.get(url)
     /////////
     ////5////
     //13
-    cholesterolDonuts(data);
+    cholesterolDonut(data);
+    //14
+    sugarAmounDonut(data);
     /////////
   })
   .catch(function (error) {
@@ -317,7 +319,7 @@ function buyDonuts(data){
     } 
 }
     //////////////////////////////////////////////////
-function cholesterolDonuts(data){
+function cholesterolDonut(data){
     for (i = 0; i < data.items.item.length; i++){
         if (parseFloat(data.items.item[i].nutrition_facts.nutrition.cholesterol.amount) > 12) {
             data.items.item[i].nutrition_facts.nutrition.fat.fat_type.trans = "3.2g";
@@ -325,4 +327,13 @@ function cholesterolDonuts(data){
         console.log(data.items.item[i].nutrition_facts.nutrition.fat.fat_type.trans);
     }
 }
+function sugarAmounDonut(data){
+    for (i = 0; i < data.items.item.length; i++){
+        if (parseInt(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars) > 50) {
+            data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.amount  = "42g";
+        }
+        console.log(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.amount);
+    }
+}
+
 
