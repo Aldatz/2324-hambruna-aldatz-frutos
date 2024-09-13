@@ -24,7 +24,8 @@ axios.get(url)
     caloriesMediaDonut(data);
     //8
     fatSumDonut(data);
-
+    //9
+    vitamineMediaDonut(data);
     /////////
   })
   .catch(function (error) {
@@ -222,7 +223,34 @@ function fatSumDonut(data){
     for (i = 0; i < data.items.item.length; i++){
         sum += parseFloat(data.items.item[i].nutrition_facts.nutrition.fat.fat_type.saturated);  
     }
-    console.log("The total saturated fat is: " + sum + "g");
-    
+    console.log("The total saturated fat is: " + sum + "g");    
+}
+function vitamineMediaDonut(data){
+    let sum = 0;
+    let sum2 = 0;
+    let sum3 = 0;
+    let sum4 = 0;
+    let counter = 0;
+    for (i = 0; i < data.items.item.length; i++){
+        for (let j = 0; j < data.items.item[i].nutrition_facts.nutrition.vitamines.length; j++) {
+            if ("Vitamin A" === data.items.item[i].nutrition_facts.nutrition.vitamines[j].type){
+                sum += parseFloat(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent)
+            }
+            if ("Vitamin C" === data.items.item[i].nutrition_facts.nutrition.vitamines[j].type){
+                sum2 += parseFloat(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent)
+            }
+            if ("Calcium" === data.items.item[i].nutrition_facts.nutrition.vitamines[j].type){
+                sum3 += parseFloat(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent)
+            }
+            if ("Iron" === data.items.item[i].nutrition_facts.nutrition.vitamines[j].type){
+                sum4 += parseFloat(data.items.item[i].nutrition_facts.nutrition.vitamines[j].percent)
+            }
+        }
+        counter++;
+    }
+    console.log("The media percen of the Vitamin A is: " + sum / counter + "%");
+    console.log("The media percen of the Vitamin C is: " + sum2 / counter + "%");
+    console.log("The media percen of the Calcium is: " + sum3 / counter + "%");
+    console.log("The media percen of the Iron A is: " + sum4 / counter + "%");
 }
 
