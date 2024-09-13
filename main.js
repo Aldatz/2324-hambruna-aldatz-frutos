@@ -8,6 +8,8 @@ axios.get(url)
     sugarDonut(data);
     //2
     ironDonut(data);
+    //3
+    proteineDonut(data);
 
   })
   .catch(function (error) {
@@ -37,7 +39,7 @@ function sugarDonut(data){
         if (maxSugar === parseInt(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars) && counter <= 1){
             donutNames = data.items.item[i].name;
         }
-        else{
+        else if (maxSugar === parseInt(data.items.item[i].nutrition_facts.nutrition.carbohydrate.carbs_detail.type.sugars) && counter > 1){
             donutNames = donutNames + data.items.item[i].name + " ";
         }
     }
@@ -84,5 +86,35 @@ function sugarDonut(data){
     }
     else{
         console.log("the donuts whit more iron are: " + donutNames);
+    }
+  }
+  function proteineDonut(data){
+    let maxProteine = 0;
+    let counter = 0;
+    let donutNames = "";
+    
+    for (i = 0; i < data.items.item.length; i++){
+        if (maxProteine <= parseInt(data.items.item[i].nutrition_facts.nutrition.proteine)){
+            maxProteine = parseInt(data.items.item[i].nutrition_facts.nutrition.proteine)
+        }
+    }
+    for (i = 0; i < data.items.item.length; i++){
+        if (maxProteine === parseInt(data.items.item[i].nutrition_facts.nutrition.proteine)){
+            counter += 1
+        }
+    }
+    for (i = 0; i < data.items.item.length; i++){
+        if (maxProteine === parseInt(data.items.item[i].nutrition_facts.nutrition.proteine) && counter <= 1){
+            donutNames = data.items.item[i].name;
+        }
+        else if (maxProteine === parseInt(data.items.item[i].nutrition_facts.nutrition.proteine) && counter > 1){
+            donutNames = donutNames + data.items.item[i].name + " ";
+        }
+    }
+    if (counter <= 1){
+        console.log(donutNames + " is the donut whit more proteines");
+    }
+    else{
+        console.log("the donuts whit more proteines are: " + donutNames);
     }
   }
